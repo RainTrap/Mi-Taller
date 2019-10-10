@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1088672802952",
+    "firebase_url": "https://mi-taller-8fa5c.firebaseio.com",
+    "project_id": "mi-taller-8fa5c",
+    "storage_bucket": "mi-taller-8fa5c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1088672802952:android:cb40807a3ae28cc9c1d73d",
+        "android_client_info": {
+          "package_name": "ar.com.initdev.taller_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1088672802952-8tpai3hinencrmovks24fbk0cm93nqj1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDE4kwzpx84ywq2ySS6VPy_bSBREseE1ps"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1088672802952-8tpai3hinencrmovks24fbk0cm93nqj1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
