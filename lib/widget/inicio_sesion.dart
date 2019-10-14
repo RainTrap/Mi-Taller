@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'registro.dart';
 import 'auth.dart';
-import 'menu.dart';
-
 
 class MyApp extends StatelessWidget {
   @override
