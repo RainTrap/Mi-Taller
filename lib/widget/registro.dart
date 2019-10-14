@@ -2,17 +2,6 @@ import 'package:flutter/material.dart';
 import 'auth.dart';
 import 'inicio_sesion.dart';
 
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return new MaterialApp(
-      debugShowCheckedModeBanner: false,
-
-      home: new SignUpPage(auth: new Auth()),
-    );
-  }
-}
-
 class SignUpPage extends StatefulWidget {
   SignUpPage({this.auth});
   final BaseAuth auth;
@@ -22,13 +11,12 @@ class SignUpPage extends StatefulWidget {
 }
 
 class SignUpPageState extends State<SignUpPage> {
-
   final formKey = new GlobalKey<FormState>();
 
   String _correo;
   String _contrasenia;
 
-  bool validateAndSave(){
+  bool validateAndSave() {
     final form = formKey.currentState;
     if (form.validate()) {
       form.save();
@@ -40,11 +28,11 @@ class SignUpPageState extends State<SignUpPage> {
   void validateAndSubmit() async {
     if (validateAndSave()) {
       try {
-        String userId = await widget.auth.createUserWithEmailAndPassword(_correo, _contrasenia);
+        String userId = await widget.auth
+            .createUserWithEmailAndPassword(_correo, _contrasenia);
         print('Se registró: $userId');
-      }
-      catch (e) {
-        print ('Error: $e');
+      } catch (e) {
+        print('Error: $e');
       }
     }
   }
@@ -100,10 +88,11 @@ class SignUpPageState extends State<SignUpPage> {
                           ),
                           focusedBorder: UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.green),
-                          )
-                      ),
+                          )),
                     ),
-                    SizedBox(height: 10.0,),
+                    SizedBox(
+                      height: 10.0,
+                    ),
                     TextFormField(
                       decoration: InputDecoration(
                           labelText: 'Apellido',
@@ -114,10 +103,11 @@ class SignUpPageState extends State<SignUpPage> {
                           ),
                           focusedBorder: UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.green),
-                          )
-                      ),
+                          )),
                     ),
-                    SizedBox(height: 10.0,),
+                    SizedBox(
+                      height: 10.0,
+                    ),
                     TextFormField(
                       decoration: InputDecoration(
                           labelText: 'Nombre del taller',
@@ -128,10 +118,11 @@ class SignUpPageState extends State<SignUpPage> {
                           ),
                           focusedBorder: UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.green),
-                          )
-                      ),
+                          )),
                     ),
-                    SizedBox(height: 10.0,),
+                    SizedBox(
+                      height: 10.0,
+                    ),
                     TextFormField(
                       decoration: InputDecoration(
                         labelText: 'Correo Electronico',
@@ -145,7 +136,8 @@ class SignUpPageState extends State<SignUpPage> {
                         ),
                       ),
                       keyboardType: TextInputType.emailAddress,
-                      validator: (value) => value.isEmpty ? 'Completar campo' : null,
+                      validator: (value) =>
+                          value.isEmpty ? 'Completar campo' : null,
                       onSaved: (value) => _correo = value,
                     ),
                     SizedBox(height: 10.0),
@@ -163,7 +155,8 @@ class SignUpPageState extends State<SignUpPage> {
                       ),
                       keyboardType: TextInputType.text,
                       obscureText: true,
-                      validator: (value) => value.isEmpty ? 'Completar campo' : null,
+                      validator: (value) =>
+                          value.isEmpty ? 'Completar campo' : null,
                       onSaved: (value) => _contrasenia = value,
                     ),
                     SizedBox(height: 35.0),
@@ -189,7 +182,9 @@ class SignUpPageState extends State<SignUpPage> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 30.0,),
+                    SizedBox(
+                      height: 30.0,
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
@@ -220,4 +215,3 @@ class SignUpPageState extends State<SignUpPage> {
     );
   }
 }
-

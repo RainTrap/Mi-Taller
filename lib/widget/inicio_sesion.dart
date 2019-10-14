@@ -2,21 +2,9 @@ import 'package:flutter/material.dart';
 import 'registro.dart';
 import 'auth.dart';
 
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return new MaterialApp(
-      debugShowCheckedModeBanner: false,
-      routes: <String, WidgetBuilder>{
-        '/registro' : (context) => SignUpPage(),
-      },
-      home: new LoginPage(auth: new Auth()),
-    );
-  }
-}
-
 class LoginPage extends StatefulWidget {
   LoginPage({this.auth});
+
   final BaseAuth auth;
 
   @override
@@ -24,13 +12,12 @@ class LoginPage extends StatefulWidget {
 }
 
 class LoginPageState extends State<LoginPage> {
-
   final formKey = new GlobalKey<FormState>();
 
   String _correo;
   String _contrasenia;
 
-  bool validateAndSave(){
+  bool validateAndSave() {
     final form = formKey.currentState;
     if (form.validate()) {
       form.save();
@@ -42,10 +29,10 @@ class LoginPageState extends State<LoginPage> {
   void validateAndSubmit() async {
     if (validateAndSave()) {
       try {
-        String userId = await widget.auth.signInWithEmailAndPassword(_correo, _contrasenia);
+        String userId =
+            await widget.auth.signInWithEmailAndPassword(_correo, _contrasenia);
         print('Inició sesión: $userId');
-      }
-      catch (e){
+      } catch (e) {
         print('Error: $e');
       }
     }
@@ -54,7 +41,7 @@ class LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-        resizeToAvoidBottomPadding: false,
+      resizeToAvoidBottomPadding: false,
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
@@ -113,7 +100,8 @@ class LoginPageState extends State<LoginPage> {
                             borderSide: BorderSide(color: Colors.green),
                           ),
                         ),
-                        validator: (value) => value.isEmpty ? 'Completar campo' : null,
+                        validator: (value) =>
+                            value.isEmpty ? 'Completar campo' : null,
                         onSaved: (value) => _correo = value,
                         keyboardType: TextInputType.emailAddress,
                       ),
@@ -132,7 +120,8 @@ class LoginPageState extends State<LoginPage> {
                         ),
                         keyboardType: TextInputType.text,
                         obscureText: true,
-                        validator: (value) => value.isEmpty ? 'Completar campo' : null,
+                        validator: (value) =>
+                            value.isEmpty ? 'Completar campo' : null,
                         onSaved: (value) => _contrasenia = value,
                       ),
                       SizedBox(height: 5.0),
@@ -140,7 +129,8 @@ class LoginPageState extends State<LoginPage> {
                         alignment: Alignment(1.0, 0.0),
                         padding: EdgeInsets.only(top: 15.0, left: 20.0),
                         child: InkWell(
-                          child: Text('¿Olvidó su contraseña?',
+                          child: Text(
+                            '¿Olvidó su contraseña?',
                             style: TextStyle(
                               color: Colors.green,
                               fontWeight: FontWeight.bold,
@@ -175,9 +165,10 @@ class LoginPageState extends State<LoginPage> {
                       )
                     ],
                   ),
-                )
+                )),
+            SizedBox(
+              height: 30.0,
             ),
-            SizedBox(height: 30.0,),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
@@ -187,10 +178,14 @@ class LoginPageState extends State<LoginPage> {
                     fontFamily: 'Montserrat',
                   ),
                 ),
-                SizedBox(width: 5.0,),
+                SizedBox(
+                  width: 5.0,
+                ),
                 InkWell(
                   onTap: () {
-                    Navigator.pushNamed(context, '/registro');
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (BuildContext context) =>
+                            SignUpPage(auth: widget.auth)));
                   },
                   child: Text(
                     'Registrar',
@@ -211,4 +206,3 @@ class LoginPageState extends State<LoginPage> {
     );
   }
 }
-
