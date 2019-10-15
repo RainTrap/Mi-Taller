@@ -3,9 +3,11 @@ import 'registro.dart';
 import 'auth.dart';
 
 class LoginPage extends StatefulWidget {
-  LoginPage({this.auth});
+  LoginPage({this.auth, this.onSignedIn});
 
   final BaseAuth auth;
+
+  final VoidCallback onSignedIn;
 
   @override
   State createState() => new LoginPageState();
@@ -32,6 +34,7 @@ class LoginPageState extends State<LoginPage> {
         String userId =
             await widget.auth.signInWithEmailAndPassword(_correo, _contrasenia);
         print('Inició sesión: $userId');
+        widget.onSignedIn();
       } catch (e) {
         print('Error: $e');
       }
