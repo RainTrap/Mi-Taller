@@ -1,11 +1,24 @@
 import 'package:flutter/material.dart';
+import 'auth.dart';
 
 class Menu extends StatelessWidget {
+  Menu({this.auth, this.onSignedOut});
+
+  final BaseAuth auth;
+
+  final VoidCallback onSignedOut;
+
+  void _signOut() async {
+    try {
+      await auth.signOut();
+      onSignedOut();
+    } catch (e) {
+      print(e);
+    }
+  }
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      drawer: Drawer(
+    return Drawer(
         child: ListView(
           children: <Widget>[
             UserAccountsDrawerHeader(
@@ -35,10 +48,14 @@ class Menu extends StatelessWidget {
               onTap: (){
               },
             ),
+            ListTile(
+              title: Text('Cerrar sesión'),
+              leading: Icon(Icons.exit_to_app),
+              onTap: _signOut(),
+            ),
           ],
         ),
-      ),
-    );
+      );
   }
 }
 
