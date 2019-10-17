@@ -33,23 +33,23 @@ class LoginPageState extends State<LoginPage> {
     if (validateAndSave()) {
       try {
         String userId =
-            await widget.auth.signInWithEmailAndPassword(_correo, _contrasenia);
+        await widget.auth.signInWithEmailAndPassword(_correo, _contrasenia);
         print('Inició sesión: $userId');
         widget.onSignedIn();
-      } on PlatformException catch(e){
+      } on PlatformException catch (e) {
         String error = e.code;
-        // ignore: unused_local_variable
         Map<String, String> errors = {
-          "ERROR_USER_NOT_FOUND":"El correo ingresado no pertenece a un usuerio",
-          "ERROR_WRONG_PASSWORD":"La contraseña es incorrecta"
+          "ERROR_INVALID_EMAIL": "Ingrese un correo electronico válido.",
+          "ERROR_USER_NOT_FOUND":
+          "El correo ingresado no pertenece a un usuario",
+          "ERROR_WRONG_PASSWORD": "La contraseña es incorrecta"
         };
         showDialog(
             context: context,
             builder: (context) => AlertDialog(
               title: Text("¡Oh no!"),
               content: Text(errors[error]),
-            )
-        );
+            ));
       }
     }
   }
