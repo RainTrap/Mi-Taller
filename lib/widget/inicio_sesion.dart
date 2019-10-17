@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'registro.dart';
 import 'auth.dart';
 
@@ -35,8 +36,20 @@ class LoginPageState extends State<LoginPage> {
             await widget.auth.signInWithEmailAndPassword(_correo, _contrasenia);
         print('Inició sesión: $userId');
         widget.onSignedIn();
-      } catch (e) {
-        print('Error: $e');
+      } on PlatformException catch(e){
+        String error = e.code;
+        // ignore: unused_local_variable
+        Map<String, String> errors = {
+          "ERROR_USER_NOT_FOUND":"El correo ingresado no pertenece a un usuerio",
+          "ERROR_WRONG_PASSWORD":"La contraseña es incorrecta"
+        };
+        showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              title: Text("¡Oh no!"),
+              content: Text(errors[error]),
+            )
+        );
       }
     }
   }
