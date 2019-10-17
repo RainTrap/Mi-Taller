@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'auth.dart';
-import 'inicio_sesion.dart';
 
 class SignUpPage extends StatefulWidget {
   SignUpPage({this.auth});
@@ -31,8 +31,18 @@ class SignUpPageState extends State<SignUpPage> {
         String userId = await widget.auth
             .createUserWithEmailAndPassword(_correo, _contrasenia);
         print('Se registró: $userId');
-      } catch (e) {
-        print('Error: $e');
+      } on PlatformException catch(e) {
+        String error = e.code;
+        Map<String,String> errors = {
+          "ERROR_INVALID_EMAIL":"El correo ingresado es inválido.",
+          "ERROR_WEAK_PASSWORD":"La contraseña debe tener al menos 6 caracteres"
+        };
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(title: Text("¡Oh no!"),
+          content: Text(errors[error]),
+          )
+        );
       }
     }
   }
