@@ -11,7 +11,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(),
-      drawer:Menu(auth: auth,),
+      drawer:Menu(auth: auth, onSignedOut: onSignedOut),
       body: new Container(
         child: new Center(
           child: new Text(

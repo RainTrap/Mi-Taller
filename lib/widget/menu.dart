@@ -51,7 +51,7 @@ class Menu extends StatelessWidget {
             ListTile(
               title: Text('Cerrar sesión'),
               leading: Icon(Icons.exit_to_app),
-              onTap: _signOut(),
+              onTap: _signOut,
             ),
           ],
         ),
